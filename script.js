@@ -1,4 +1,4 @@
-// Activity Options for Each Section
+// Activities categorized by section
 const activities = {
     "heritage-options": ["Tarixi Şəhər Maketi", "Mədəni İrs Tapmacaları", "Dünya Xəritəsi Oyunu"],
     "steam-options": ["LEGO Mühəndislik Layihəsi", "Kodlaşdırma Tapşırıqları", "Robot Dizaynı"],
@@ -6,15 +6,15 @@ const activities = {
     "experiment-options": ["Kimya Təcrübələri", "Fizika Qanunları Testi", "Biologiya Araşdırması"]
 };
 
-// Object to store selected choices
+// Object to store selected activities
 const selectedOptions = {
-    heritage: "",
-    steam: "",
-    art: "",
-    experiment: ""
+    heritage: null,
+    steam: null,
+    art: null,
+    experiment: null
 };
 
-// Function to Populate Activity Options
+// Function to populate activity buttons
 function populateOptions(sectionId, optionsArray) {
     const container = document.getElementById(sectionId);
     optionsArray.forEach(option => {
@@ -30,10 +30,9 @@ function populateOptions(sectionId, optionsArray) {
     });
 }
 
-// Function to Select an Option
+// Function to handle selection
 function selectOption(sectionId, button, option) {
-    // Extract category name from sectionId
-    const category = sectionId.replace("-options", "");
+    const category = sectionId.split("-")[0]; // Extract category from sectionId
 
     // Remove previous selection
     document.querySelectorAll(`#${sectionId} .option`).forEach(btn => btn.classList.remove("selected"));
@@ -42,11 +41,11 @@ function selectOption(sectionId, button, option) {
     button.classList.add("selected");
     selectedOptions[category] = option;
 
-    // Update summary text
+    // Update summary
     updateSummary();
 }
 
-// Function to Update Summary
+// Function to update summary text
 function updateSummary() {
     document.getElementById("summary-text").innerHTML = `
         <strong>Mədəni İrs:</strong> ${selectedOptions.heritage || "Seçilməyib"}<br>
@@ -56,7 +55,7 @@ function updateSummary() {
     `;
 }
 
-// Function to Submit Selections via WhatsApp
+// Function to submit selection via WhatsApp
 document.getElementById("submitBtn").addEventListener("click", () => {
     if (!selectedOptions.heritage || !selectedOptions.steam || !selectedOptions.art || !selectedOptions.experiment) {
         alert("Zəhmət olmasa, hər bölmədən bir seçim edin.");
@@ -73,7 +72,7 @@ document.getElementById("submitBtn").addEventListener("click", () => {
     window.open(whatsappUrl, "_blank");
 });
 
-// Populate All Sections
+// Populate activity options for all sections
 Object.keys(activities).forEach(section => {
     populateOptions(section, activities[section]);
 });
