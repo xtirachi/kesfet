@@ -109,7 +109,7 @@ document.getElementById("submitBtn").addEventListener("click", () => {
 - İncəsənət: ${selectedOptions.art}
 - Eksperiment: ${selectedOptions.experiment}`;
 
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=+994703745340&text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=+994702342342&text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
 });
 
